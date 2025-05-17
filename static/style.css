@@ -1,0 +1,140 @@
+body {
+  background-color: #000000;
+  color: #33ff33;
+  font-family: monospace;
+  margin: 0;
+  overflow: hidden;
+  height: 100%;
+}
+
+
+#terminal {
+  max-width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#output {
+  flex-grow: 1;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  font-size: 1rem;
+  padding: 20px;
+  padding-bottom: 100px; /* ✅ for bottom visibility */
+}
+
+
+.line, .input-line {
+  font-family: monospace;
+  color: #33ff33;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.input-line input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #33ff33;
+  font-family: monospace;
+  font-size: 1rem;
+  flex-grow: 1;
+}
+
+.prompt {
+  margin-right: 6px;
+  color: #33ff33;
+}
+
+/* Assistant output block */
+.command-block {
+  background-color: #111;
+  border-left: 3px solid #00bfff;
+  padding: 6px 12px;
+  margin: 4px 0 12px 0;
+  font-family: monospace;
+  color: #00bfff;
+  white-space: pre-wrap;
+}
+
+/* ASCII header style */
+.ascii-banner {
+  color: #ff00ff;
+  white-space: pre;
+  font-size: 0.85rem;
+  margin-bottom: 12px;
+}
+
+/* Highlight links inside bot responses */
+.command-block a {
+  color: #ffff00;
+  text-decoration: underline;
+}
+
+.ascii-image {
+  white-space: pre;
+  font-family: monospace;
+  color: #ffffff; /* white on black */
+  font-size: 10px;
+  line-height: 10px;
+  margin-bottom: 10px;
+}
+
+.ascii-name {
+  white-space: pre;
+  font-family: monospace;
+  color: #33ff33; /* green for name */
+  font-size: 14px;
+  line-height: 14px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+#command-tags {
+  display: flex;
+  gap: 10px;
+  padding: 8px 20px;
+  background-color: #000;
+  border-bottom: 1px solid #333;
+  flex-wrap: wrap;
+}
+
+.suggestion-label {
+  margin: 0;
+  color: #33ff33;;
+  font-family: monospace;
+  font-size: 0.9rem;
+}
+
+.cmd-tag {
+  background-color: #111;
+  color: #33ff33;
+  border: 1px solid #33ff33;
+  padding: 4px 10px;
+  font-family: monospace;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.cmd-tag:hover {
+  background-color: #33ff33;
+  color: #000;
+}
+
+html, body {
+  height: 100%;
+}
+
+#terminal {
+  height: 100vh;
+  overflow: hidden; /* ✅ prevents double scrollbars */
+}
+
+#output {
+  padding-bottom: 100px; /* ✅ breathing room for bottom responses */
+  scroll-behavior: smooth;
+}
