@@ -4,10 +4,10 @@ let historyIndex = -1;
 
 function displayAsciiBanner() {
   const image = `
-                                                                             
-                                                                             
-                                                                             
-                                                                             
+
+
+
+
                                    -+##%%#*=.                                
                                :*##############-                             
                              .##################*.                           
@@ -55,6 +55,8 @@ function displayAsciiBanner() {
 Software Engineer
 `;
 
+  const subtitle = "Type anything to get started!✨";
+
   const bannerElement1 = document.createElement("div");
   bannerElement1.className = "ascii-image";
   bannerElement1.textContent = image;
@@ -63,8 +65,13 @@ Software Engineer
   bannerElement2.className = "ascii-name";
   bannerElement2.textContent = name;
 
+  const bannerElement3 = document.createElement("div");
+  bannerElement3.className = "ascii-subtitle";
+  bannerElement3.textContent = subtitle;
+
   output.appendChild(bannerElement1);
   output.appendChild(bannerElement2);
+  output.appendChild(bannerElement3);
 }
 
 function createInputLine() {
@@ -87,7 +94,6 @@ function createInputLine() {
   sendBtn.addEventListener("click", () => {
     input.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter" }));
   });
-
 
   inputLine.appendChild(prompt);
   inputLine.appendChild(input);
