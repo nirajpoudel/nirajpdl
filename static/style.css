@@ -138,3 +138,78 @@ html, body {
   padding-bottom: 100px; /* ✅ breathing room for bottom responses */
   scroll-behavior: smooth;
 }
+
+@media (max-width: 768px) {
+  .ascii-image {
+    font-size: 6px;
+    line-height: 6px;
+  }
+
+  .ascii-name {
+    font-size: 10px;
+    line-height: 10px;
+  }
+
+  #command-tags {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .cmd-tag {
+    font-size: 0.75rem;
+    padding: 3px 8px;
+  }
+
+  .input-line input {
+    font-size: 0.9rem;
+  }
+
+  .command-block {
+    font-size: 0.9rem;
+  }
+
+  #terminal {
+    height: auto;
+  }
+
+  #output {
+    max-height: 75vh;
+    overflow-y: auto;
+  }
+}
+
+.send-btn {
+  display: none;
+  margin-top: 8px;
+  padding: 6px 16px;
+  font-size: 1rem;
+  font-family: monospace;
+  border: none;
+  border-radius: 4px;
+  background-color: #33ff33;
+  color: #000;
+}
+
+.send-break {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .send-btn {
+    display: block;
+  }
+
+  .send-break {
+    display: block;
+  }
+
+  .input-line {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .input-field {
+    width: 100%;
+  }
+}

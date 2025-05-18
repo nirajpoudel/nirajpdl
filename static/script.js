@@ -67,7 +67,6 @@ Software Engineer
   output.appendChild(bannerElement2);
 }
 
-
 function createInputLine() {
   const inputLine = document.createElement("div");
   inputLine.className = "input-line";
@@ -82,8 +81,20 @@ function createInputLine() {
   input.autocomplete = "off";
   input.focus();
 
+  const sendBtn = document.createElement("button");
+  sendBtn.textContent = "Send";
+  sendBtn.className = "send-btn";
+  sendBtn.addEventListener("click", () => {
+    input.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter" }));
+  });
+
+
   inputLine.appendChild(prompt);
   inputLine.appendChild(input);
+  const br = document.createElement("br");
+  br.className = "send-break"; // add a class to target with media query
+  inputLine.appendChild(br);
+  inputLine.appendChild(sendBtn);
   output.appendChild(inputLine);
   output.scrollTo({ top: output.scrollHeight, behavior: "smooth" });
 
@@ -101,16 +112,16 @@ function createInputLine() {
       output.replaceChild(echoLine, inputLine);
 
       const normalized = userInput.toLowerCase();
-      const isResumeRequest =normalized.includes("resume") && (normalized.includes("open") || normalized.includes("view"));
-
+      const isResumeRequest =
+        normalized.includes("resume") &&
+        (normalized.includes("open") || normalized.includes("view"));
 
       if (isResumeRequest) {
         try {
-            appendLine("📄 Opening resume...");
-            window.open("/resume", "_blank");  // 🚀 This must run immediately in response to user action
-            createInputLine();
-            return;
-
+          appendLine("📄 Opening resume...");
+          window.open("/resume", "_blank"); // 🚀 This must run immediately in response to user action
+          createInputLine();
+          return;
         } catch (err) {
           appendLine("❌ Failed to download resume.");
         }
@@ -149,8 +160,6 @@ function createInputLine() {
   });
 }
 
-
-
 function appendLine(text) {
   const line = document.createElement("div");
   line.className = "line";
@@ -176,7 +185,7 @@ async function typewriterEffect(text) {
 
   block.innerHTML = block.innerHTML.replace(
     /(https?:\/\/[^\s]+)/g,
-    '<a href="$1" target="_blank">$1</a>'
+    '<a href="$1" target="_blank">$1</a>',
   );
 }
 
@@ -184,13 +193,18 @@ window.onload = () => {
   displayAsciiBanner();
   createInputLine();
 
-  document.querySelectorAll('.cmd-tag').forEach(tag => {
-    tag.addEventListener('click', () => {
+  document.querySelectorAll(".cmd-tag").forEach((tag) => {
+    tag.addEventListener("click", () => {
       const question = tag.dataset.question;
-      const inputField = document.querySelector('.input-field');
+      const inputField = document.querySelector(".input-field");
       if (inputField) {
         inputField.value = question;
         inputField.focus();
+
+        // ✅ Scroll input into view (important for mobile)
+        setTimeout(() => {
+          inputField.scrollIntoView({ behavior: "smooth", block: "end" });
+        }, 100);
       }
     });
   });
