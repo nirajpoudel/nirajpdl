@@ -243,3 +243,55 @@ html, body {
     overflow-y: auto;
   }
 }
+
+/* Hide scrollbars while still allowing scroll */
+#output {
+  -ms-overflow-style: none;  /* IE & Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+#output::-webkit-scrollbar {
+  display: none;             /* Chrome, Safari, Opera */
+}
+
+/* Prevent zoom on mobile inputs */
+input, textarea, select, button {
+  font-size: 16px;  /* 👈 Minimum to avoid zooming on iOS */
+}
+
+/* Better scroll area on mobile */
+@media (max-width: 768px) {
+  body, html {
+    overscroll-behavior: contain;
+    touch-action: pan-y;
+  }
+
+  #output {
+    max-height: calc(100vh - 200px); /* fits better under chat input */
+  }
+
+  #chat-input {
+    font-size: 16px;  /* Prevent zoom */
+  }
+}
+
+@media (max-width: 768px) {
+  #command-tags {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 6px;
+    padding: 10px;
+    justify-items: center;
+  }
+
+  .cmd-tag {
+    font-size: 0.75rem;
+    padding: 6px 4px;
+    text-align: center;
+  }
+
+  .suggestion-label {
+    grid-column: 1 / -1;
+    font-size: 0.8rem;
+    margin-bottom: 6px;
+  }
+}

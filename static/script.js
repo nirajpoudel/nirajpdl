@@ -75,7 +75,7 @@ function appendLine(text) {
   line.className = "line";
   line.textContent = text;
   output.appendChild(line);
-  output.scrollTo({ top: output.scrollHeight, behavior: "smooth" });
+  output.scrollTop = output.scrollHeight;
 }
 
 async function typewriterEffect(text) {
@@ -89,7 +89,7 @@ async function typewriterEffect(text) {
 
   for (let i = 0; i < content.length; i++) {
     block.textContent += content[i];
-    output.scrollTo({ top: output.scrollHeight, behavior: "smooth" });
+    output.scrollTop = output.scrollHeight;
     await new Promise((r) => setTimeout(r, 10));
   }
 
