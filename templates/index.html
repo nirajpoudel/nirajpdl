@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
 <body>
-  <!-- Suggestion Label + Tags in One Row -->
+  <!-- Suggestions -->
   <div id="command-tags">
     <h4 class="suggestion-label">Suggestions:</h4>
     <span class="cmd-tag" data-question="Tell me about Niraj's education.">&lt;/education&gt;</span>
@@ -16,14 +16,23 @@
     <span class="cmd-tag" data-question="What are Niraj's interests?">&lt;/interests&gt;</span>
     <span class="cmd-tag" data-question="What are his future goals?">&lt;/goals&gt;</span>
     <span class="cmd-tag download-resume" data-question="Wanna view Niraj Resume?">&lt;/download-resume&gt;</span>
-
   </div>
-
 
   <!-- Terminal Section -->
   <div id="terminal">
     <div id="output">
       <div class="line">👨‍💻 Hi there! This is Niraj. How are you today?</div>
+    </div>
+  </div>
+
+  <!-- ChatGPT-style input bar -->
+  <div class="chat-input-wrapper">
+    <textarea id="chat-input" placeholder="Message Niraj..." rows="1"></textarea>
+    <div class="chat-input-actions">
+      <button id="mic-btn" title="Voice input">🎤</button>
+      <button id="image-btn" title="Upload image">🖼️</button>
+      <button id="send-btn" title="Send">➤</button>
+      <input type="file" id="image-upload" accept="image/*" hidden />
     </div>
   </div>
 

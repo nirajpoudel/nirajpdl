@@ -1,56 +1,76 @@
-body {
-  background-color: #000000;
+/* Base Layout */
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #000;
   color: #33ff33;
   font-family: monospace;
-  margin: 0;
   overflow: hidden;
+  width: 100%;
   height: 100%;
+  box-sizing: border-box;
 }
 
-
+/* Terminal Container */
 #terminal {
-  max-width: 100%;
-  height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  max-width: 800px;
+  margin: 0 auto;
+  height: calc(100vh - 140px); /* Leaves room for input */
 }
 
 #output {
   flex-grow: 1;
   overflow-y: auto;
-  white-space: pre-wrap;
-  font-size: 1rem;
   padding: 20px;
-  padding-bottom: 100px;
-  /* ✅ for bottom visibility */
+  padding-bottom: 160px;
+  scroll-behavior: smooth;
+  white-space: pre-wrap;
+  box-sizing: border-box;
+
+  /* ✅ Hides scrollbar visually but allows scrolling */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE 10+ */
+}
+#output::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
 }
 
 
-.line,
-.input-line {
-  font-family: monospace;
-  color: #33ff33;
-  margin-bottom: 4px;
+/* Line Styles */
+.line, .input-line {
   display: flex;
   align-items: center;
+  gap: 10px;
+  width: 100%;
+  flex-wrap: wrap;
+  margin-top: 12px;
 }
 
+/* Input Line */
 .input-line input {
-  background: transparent;
-  border: none;
+  background: #111;
+  border: 1px solid #33ff33;
+  border-radius: 6px;
+  padding: 10px 12px;
   outline: none;
   color: #33ff33;
   font-family: monospace;
   font-size: 1rem;
   flex-grow: 1;
+  width: 100%;
+  box-sizing: border-box;
 }
 
+/* Prompt */
 .prompt {
   margin-right: 6px;
   color: #33ff33;
 }
 
-/* Assistant output block */
+/* Command Block Output */
 .command-block {
   background-color: #111;
   border-left: 3px solid #00bfff;
@@ -61,7 +81,7 @@ body {
   white-space: pre-wrap;
 }
 
-/* ASCII header style */
+/* ASCII Art */
 .ascii-banner {
   color: #ff00ff;
   white-space: pre;
@@ -69,17 +89,10 @@ body {
   margin-bottom: 12px;
 }
 
-/* Highlight links inside bot responses */
-.command-block a {
-  color: #ffff00;
-  text-decoration: underline;
-}
-
 .ascii-image {
   white-space: pre;
   font-family: monospace;
   color: #ffffff;
-  /* white on black */
   font-size: 10px;
   line-height: 10px;
   margin-bottom: 10px;
@@ -89,26 +102,28 @@ body {
   white-space: pre;
   font-family: monospace;
   color: #33ff33;
-  /* green for name */
   font-size: 14px;
   line-height: 14px;
   font-weight: bold;
   margin-bottom: 16px;
 }
 
+/* Suggestions Row */
 #command-tags {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   padding: 8px 20px;
   background-color: #000;
   border-bottom: 1px solid #333;
-  flex-wrap: wrap;
+  max-width: 800px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .suggestion-label {
   margin: 0;
   color: #33ff33;
-  ;
   font-family: monospace;
   font-size: 0.9rem;
 }
@@ -130,23 +145,64 @@ body {
   color: #000;
 }
 
-html,
-body {
-  height: 100%;
+/* Chat Input Wrapper */
+.chat-input-wrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 12px 20px;
+  background-color: #000;
+  border-top: 1px solid #333;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
-#terminal {
-  height: 100vh;
-  overflow: hidden;
-  /* ✅ prevents double scrollbars */
+/* Textarea Chat Input */
+#chat-input {
+  resize: none;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: #111;
+  color: #33ff33;
+  font-family: monospace;
+  font-size: 1rem;
+  min-height: 44px;
+  max-height: 150px;
+  overflow-y: auto;
+  outline: none;
 }
 
-#output {
-  padding-bottom: 100px;
-  /* ✅ breathing room for bottom responses */
-  scroll-behavior: smooth;
+/* Input Action Icons */
+.chat-input-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 8px;
 }
 
+.chat-input-actions button {
+  background: #33ff33;
+  color: #000;
+  border: none;
+  font-size: 1rem;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-family: monospace;
+  cursor: pointer;
+}
+
+.chat-input-actions button:hover {
+  background: #66ff66;
+}
+
+/* Mobile Adjustments */
 @media (max-width: 768px) {
   .ascii-image {
     font-size: 6px;
@@ -169,12 +225,13 @@ body {
     padding: 3px 8px;
   }
 
-  .input-line input {
-    font-size: 0.9rem;
+  #chat-input {
+    font-size: 0.95rem;
   }
 
-  .command-block {
+  .chat-input-actions button {
     font-size: 0.9rem;
+    padding: 6px 12px;
   }
 
   #terminal {
@@ -184,40 +241,5 @@ body {
   #output {
     max-height: 75vh;
     overflow-y: auto;
-  }
-}
-
-.send-btn {
-  display: none;
-  margin-top: 8px;
-  padding: 6px 16px;
-  font-size: 1rem;
-  font-family: monospace;
-  border: none;
-  border-radius: 4px;
-  background-color: #33ff33;
-  color: #000;
-}
-
-.send-break {
-  display: none;
-}
-
-@media (max-width: 768px) {
-  .send-btn {
-    display: block;
-  }
-
-  .send-break {
-    display: block;
-  }
-
-  .input-line {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .input-field {
-    width: 100%;
   }
 }

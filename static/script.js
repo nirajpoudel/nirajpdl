@@ -4,48 +4,44 @@ let historyIndex = -1;
 
 function displayAsciiBanner() {
   const image = `
-
-
-
-
-                                   -+##%%#*=.                                
-                               :*##############-                             
-                             .##################*.                           
-                            =#####################:                          
-                           +#######################:                         
-                          +#########################.                        
-                         *###########################                        
-                        *############################*                       
-                       +##############################-                      
-                      -###############################*.                     
-                     .*################################+                     
-                     +#######*+==---------==++*#########-                    
-                    -###*=+*=--------:.:---------++*####+                    
-                    +#%@@@@@#------:.....:------+@@@@@%##:                   
-                     +##%%@@@*::.....:::.....::-@@@@%###+                    
-                      .*##%%@@+...............:%@@%###+.                     
-                    .-#@%####%%*:.::---:::...:#@%###%*.                      
-                  =#@@@@@%*+###%%=..........=%%####%@@@%+.                   
-               .*@@@@@@@@@@%==##%%%*-.....=#%####%@@@@@@@@#-                 
-              +#%@@@@@@@@@@@@%:=##%@@%%%%%@%####%@@@@@@@@@%##-               
-            -####%@@@@@@@@@@@@%+:*##@@@@@%####%@@@@@@@@@@%####*.             
-           +######%@@@@@@@@@@@@@*:+##%@@%####%@@@@@@@@@@%#######.            
-          +#####-...:...........:.....................:.......-##:           
-         +######=:::::::::::::::::::::::::::::::::::::::::::::=###-          
-        =#######=:::::::::::::::::::::::::::::::::::::::::::::=####-         
-       =#######%=:::::::::::::::::::::::::::::::::::::::::::::=#####.        
-      -####%%%#%=:::::::::::::::::::::::::::::::::::::::::::::=#%###*.       
-     :###%%%%#%%=:::::::::::::::::::-=-:-=-:::::::::::::::::::=#%%###+       
-     #####%%%%%%=:::::::::::::::::::-=::::=:::::::::::::::::::=#%#####=      
-    +##%%%%%%%%%=:::::::::::::::::::--::::-:::::::::::::::::::=#%%%%###.     
-   -###%%%%%%%%%=:::::::::::::::::::-=-:-==:::::::::::::::::::=#%%%%%###     
-  .*#######%%%%%=:::::::::::::::::::::::::::::::::::::::::::::=#%#######=    
-  -############%=:::::::::::::::::::::::::::::::::::::::::::::=##%######*.   
-  +#############=:::::::::::::::::::::::::::::::::::::::::::::=##########-   
-  -#############=:::::::::::::::::::::::::::::::::::::::::::::=#########*    
-    :+##########=:::::::::::::::::::::::::::::::::::::::::::::=######*=      
-         .-++***-:::::::::::::::::::::::::::::::::::::::::::::-+=-.          
-                .:::::::::::::::::::::::::::::::::::::::::::::.              
+                                   -+##%%#*=.
+                               :*##############-
+                             .##################*.
+                            =#####################:
+                           +#######################:
+                          +#########################.
+                         *###########################
+                        *############################*
+                       +##############################-
+                      -###############################*.
+                     .*################################+
+                     +#######*+==---------==++*#########-
+                    -###*=+*=--------:.:---------++*####+
+                    +#%@@@@@#------:.....:------+@@@@@%##:
+                     +##%%@@@*::.....:::.....::-@@@@%###+
+                      .*##%%@@+...............:%@@%###+.
+                    .-#@%####%%*:.::---:::...:#@%###%*.
+                  =#@@@@@%*+###%%=..........=%%####%@@@%+.
+               .*@@@@@@@@@@%==##%%%*-.....=#%####%@@@@@@@@#-
+              +#%@@@@@@@@@@@@%:=##%@@%%%%%@%####%@@@@@@@@@%##-
+            -####%@@@@@@@@@@@@%+:*##@@@@@%####%@@@@@@@@@@%####*.
+           +######%@@@@@@@@@@@@@*:+##%@@%####%@@@@@@@@@@%#######.
+          +#####-...:...........:.....................:.......-##:
+         +######=:::::::::::::::::::::::::::::::::::::::::::::=###-
+        =#######=:::::::::::::::::::::::::::::::::::::::::::::=####-
+       =#######%=:::::::::::::::::::::::::::::::::::::::::::::=#####.
+      -####%%%#%=:::::::::::::::::::::::::::::::::::::::::::::=#%###*.
+     :###%%%%#%%=:::::::::::::::::::-=-:-=-:::::::::::::::::::=#%%###+
+     #####%%%%%%=:::::::::::::::::::-=::::=:::::::::::::::::::=#%#####=
+    +##%%%%%%%%%=:::::::::::::::::::--::::-:::::::::::::::::::=#%%%%###.
+   -###%%%%%%%%%=:::::::::::::::::::-=-:-==:::::::::::::::::::=#%%%%%###
+  .*#######%%%%%=:::::::::::::::::::::::::::::::::::::::::::::=#%#######=
+  -############%=:::::::::::::::::::::::::::::::::::::::::::::=##%######*.
+  +#############=:::::::::::::::::::::::::::::::::::::::::::::=##########-
+  -#############=:::::::::::::::::::::::::::::::::::::::::::::=#########*
+    :+##########=:::::::::::::::::::::::::::::::::::::::::::::=######*=     
+         .-++***-:::::::::::::::::::::::::::::::::::::::::::::-+=-.
+                .:::::::::::::::::::::::::::::::::::::::::::::.
 `;
 
   const name = `
@@ -74,98 +70,6 @@ Software Engineer
   output.appendChild(bannerElement3);
 }
 
-function createInputLine() {
-  const inputLine = document.createElement("div");
-  inputLine.className = "input-line";
-
-  const prompt = document.createElement("span");
-  prompt.className = "prompt";
-  prompt.textContent = "localhost@user>> ";
-
-  const input = document.createElement("input");
-  input.type = "text";
-  input.className = "input-field";
-  input.autocomplete = "off";
-  input.focus();
-
-  const sendBtn = document.createElement("button");
-  sendBtn.textContent = "Send";
-  sendBtn.className = "send-btn";
-  sendBtn.addEventListener("click", () => {
-    input.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter" }));
-  });
-
-  inputLine.appendChild(prompt);
-  inputLine.appendChild(input);
-  const br = document.createElement("br");
-  br.className = "send-break"; // add a class to target with media query
-  inputLine.appendChild(br);
-  inputLine.appendChild(sendBtn);
-  output.appendChild(inputLine);
-  output.scrollTo({ top: output.scrollHeight, behavior: "smooth" });
-
-  input.addEventListener("keydown", async (e) => {
-    if (e.key === "Enter") {
-      const userInput = input.value.trim();
-      if (!userInput) return;
-
-      history.push(userInput);
-      historyIndex = history.length;
-
-      const echoLine = document.createElement("div");
-      echoLine.className = "line";
-      echoLine.textContent = `localhost@user>> ${userInput}`;
-      output.replaceChild(echoLine, inputLine);
-
-      const normalized = userInput.toLowerCase();
-      const isResumeRequest =
-        normalized.includes("resume") &&
-        (normalized.includes("open") || normalized.includes("view"));
-
-      if (isResumeRequest) {
-        try {
-          appendLine("📄 Opening resume...");
-          window.open("/resume", "_blank"); // 🚀 This must run immediately in response to user action
-          createInputLine();
-          return;
-        } catch (err) {
-          appendLine("❌ Failed to download resume.");
-        }
-
-        createInputLine();
-        return;
-      }
-
-      try {
-        const res = await fetch("/chat", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: userInput }),
-        });
-
-        const data = await res.json();
-        await typewriterEffect(data.reply);
-      } catch (err) {
-        appendLine("❌ Error fetching response");
-      }
-
-      createInputLine();
-    } else if (e.key === "ArrowUp") {
-      if (historyIndex > 0) {
-        historyIndex--;
-        input.value = history[historyIndex];
-      }
-    } else if (e.key === "ArrowDown") {
-      if (historyIndex < history.length - 1) {
-        historyIndex++;
-        input.value = history[historyIndex];
-      } else {
-        input.value = "";
-      }
-    }
-  });
-}
-
 function appendLine(text) {
   const line = document.createElement("div");
   line.className = "line";
@@ -191,27 +95,87 @@ async function typewriterEffect(text) {
 
   block.innerHTML = block.innerHTML.replace(
     /(https?:\/\/[^\s]+)/g,
-    '<a href="$1" target="_blank">$1</a>',
+    '<a href="$1" target="_blank">$1</a>'
   );
+}
+
+function handleSend() {
+  const textarea = document.getElementById("chat-input");
+  const userInput = textarea.value.trim();
+  if (!userInput) return;
+
+  const echoLine = document.createElement("div");
+  echoLine.className = "line";
+  echoLine.textContent = `localhost@user>> ${userInput}`;
+  output.appendChild(echoLine);
+  output.scrollTo({ top: output.scrollHeight });
+
+  textarea.value = "";
+  textarea.style.height = "44px";
+
+  if (userInput.toLowerCase().includes("resume")) {
+    appendLine("📄 Opening resume...");
+    window.open("/resume", "_blank");
+    return;
+  }
+
+  fetch("/chat", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ message: userInput }),
+  })
+    .then((res) => res.json())
+    .then((data) => typewriterEffect(data.reply))
+    .catch(() => appendLine("❌ Error fetching response"));
 }
 
 window.onload = () => {
   displayAsciiBanner();
-  createInputLine();
 
   document.querySelectorAll(".cmd-tag").forEach((tag) => {
     tag.addEventListener("click", () => {
       const question = tag.dataset.question;
-      const inputField = document.querySelector(".input-field");
+      const inputField = document.getElementById("chat-input");
       if (inputField) {
         inputField.value = question;
         inputField.focus();
-
-        // ✅ Scroll input into view (important for mobile)
         setTimeout(() => {
           inputField.scrollIntoView({ behavior: "smooth", block: "end" });
         }, 100);
       }
     });
+  });
+
+  const textarea = document.getElementById("chat-input");
+  const sendBtn = document.getElementById("send-btn");
+  const micBtn = document.getElementById("mic-btn");
+  const imageBtn = document.getElementById("image-btn");
+  const imageUpload = document.getElementById("image-upload");
+
+  textarea.addEventListener("input", () => {
+    textarea.style.height = "auto";
+    textarea.style.height = Math.min(textarea.scrollHeight, 150) + "px";
+  });
+
+  sendBtn.addEventListener("click", handleSend);
+
+  textarea.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
+  });
+
+  micBtn.addEventListener("click", () => {
+    appendLine("🎤 Voice input coming soon...");
+  });
+
+  imageBtn.addEventListener("click", () => imageUpload.click());
+  imageUpload.addEventListener("change", () => {
+    const file = imageUpload.files[0];
+    if (file) {
+      appendLine(`🖼️ You selected: ${file.name}`);
+      appendLine("🖼️ Image reader coming soon...");
+    }
   });
 };
