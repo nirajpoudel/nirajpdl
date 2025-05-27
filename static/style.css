@@ -10,7 +10,6 @@ html, body {
   height: 100%;
   box-sizing: border-box;
 }
-
 /* Terminal Container */
 #terminal {
   display: flex;
@@ -37,7 +36,6 @@ html, body {
 #output::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Edge */
 }
-
 
 /* Line Styles */
 .line, .input-line {
